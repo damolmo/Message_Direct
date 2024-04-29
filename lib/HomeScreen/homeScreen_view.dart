@@ -43,6 +43,9 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
           if (viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
             UserField(viewModel: viewModel),
 
+          if (viewModel.isDialerSelected && viewModel.numberField.text.isNotEmpty && !viewModel.isFlagSelection)
+            MessageField(viewModel: viewModel),
+
           // Flag Selection
           if (viewModel.isFlagSelection && viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
             CodesList(viewModel: viewModel),

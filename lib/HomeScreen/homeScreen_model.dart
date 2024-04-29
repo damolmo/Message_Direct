@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:message_direct/Data/codesData.dart';
 import 'package:stacked/stacked.dart';
 import '../exports.dart';
@@ -14,7 +15,9 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isWhatsAppUrl = true;
   bool isKeyboardEnabled = false;
   bool isFlagSelection = false;
+  bool isMessageFieldActive = false;
   TextEditingController numberField = TextEditingController(text: "");
+  TextEditingController messageField = TextEditingController(text: "");
   int choosedCountryCode = 0;
   int choosedNumberHistory = 0;
   List<BasicConfig> config = [];
@@ -84,19 +87,25 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   }
 
-  Uri getWhatsAppUri() =>
-      Uri(
-        scheme: 'https',
-        host: 'wa.me',
-        path: isDialerSelected ? "${codes[choosedCountryCode].countryCode}${numberField.text}" : "${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}"
-      );
+  getUriWhatsAppString(){
+    if (isDialerSelected){
+      return (Uri.parse('whatsapp://send?phone="${codes[choosedCountryCode].countryCode}${numberField.text}"&text=${messageField.text}'));
+    } else{
+      return (Uri.parse('whatsapp://send?phone="${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}"&text=${messageField.text}'));
+    }
+  }
 
-  Uri getTelegramUri() =>
-      Uri(
-          scheme: 'https',
-          host: 't.me',
-          path: isDialerSelected ? "${codes[choosedCountryCode].countryCode}${numberField.text}" : "${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}"
-      );
+  getUriTelegramString(){
+    if (isDialerSelected){
+      return (Uri.parse('https://t.me/${codes[choosedCountryCode].countryCode}${numberField.text}?chat_id=&text=${messageField.text}'));
+    } else{
+      return (Uri.parse('https://t.me/${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}?chat_id=&text=${messageField.text}'));
+    }
+  }
+
+  Uri getWhatsAppUri() => getUriWhatsAppString();
+
+  Uri getTelegramUri() => getUriTelegramString();
 
   void openNumberChat() async {
     // A method that opens a whatsapp requested number
@@ -123,6 +132,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   }
 
   void clearAppFields() async {
+    messageField.text = "";
     numberField.text = "";
     notifyListeners();
   }

@@ -19,7 +19,7 @@ class UserField extends StatelessWidget{
       margin: EdgeInsets.only(
         left: getDeviceWidth(context) * 0.05,
         right: getDeviceWidth(context) * 0.05,
-        top: viewModel.getKeyBoardTop(context),
+        top: viewModel.numberField.text.isNotEmpty && !viewModel.isFlagSelection ? viewModel.getKeyBoardTop(context) * 0.8 : viewModel.getKeyBoardTop(context),
         bottom: viewModel.getKeyBoardBottom(context)
       ),
       child: Row(
