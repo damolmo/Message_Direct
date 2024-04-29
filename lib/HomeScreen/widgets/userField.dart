@@ -40,7 +40,7 @@ class UserField extends StatelessWidget{
               borderRadius: BorderRadius.circular(55),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(viewModel.codes[viewModel.choosedCountryCode].countryFlag)
+                image: viewModel.codes.isEmpty ? const AssetImage("assets/flags/us.png") : AssetImage(viewModel.codes[viewModel.choosedCountryCode].countryFlag)
               )
             ),
             ),
@@ -63,6 +63,7 @@ class UserField extends StatelessWidget{
               style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  * 0.06, fontWeight: FontWeight.bold ),
               onTap: (){
                 viewModel.isKeyboardEnabled = true;
+                viewModel.isFlagSelection = false;
                 viewModel.notifyListeners();
               },
 
@@ -96,7 +97,15 @@ class UserField extends StatelessWidget{
             ),
             child: IconButton(
               onPressed: (){
-                viewModel.openNumberChat();
+                if (viewModel.numberField.text.isNotEmpty){
+                  viewModel.saveCurrentCountryCode();
+                  viewModel.openNumberChat();
+                  viewModel.addNumberToHistory();
+                } else {
+                  viewModel.notifyUserRequiredValue("Not a valid phone number!\nTry again", context);
+
+                }
+
               },
               icon: const Icon(Icons.send, color: Colors.white, size: 40,),
             ),

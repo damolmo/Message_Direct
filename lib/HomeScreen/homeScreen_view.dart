@@ -38,9 +38,19 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
             UserField(viewModel: viewModel),
 
           // Flag Selection
-          if (viewModel.isFlagSelection)
+          if (viewModel.isFlagSelection && viewModel.isDialerSelected)
             CodesList(viewModel: viewModel),
+
           // Numbers History
+          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty)
+            NumbersHistory(viewModel: viewModel),
+
+          if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty)
+            const NoHistoryMessage(),
+
+          // Clear Numbers
+          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty)
+            RemoveHistoryButton(viewModel: viewModel),
 
         ],
       )
