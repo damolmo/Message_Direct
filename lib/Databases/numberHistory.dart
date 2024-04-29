@@ -43,7 +43,7 @@ class NumberHistory{
   static insertNumberIntoTable(NumberHistory number) async {
     // A static method that inserts a number into the table
     if (kIsWeb){
-      final Database db = await openDatabase("direct.db");
+      final Database db = await databaseFactoryFfiWeb.openDatabase("direct.db");
       db.insert("numberHistory", number.toMap());
     } else {
       final Database db = await openDatabase("direct.db");
