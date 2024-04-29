@@ -14,17 +14,27 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isWhatsAppUrl = true;
   bool isKeyboardEnabled = false;
   bool isFlagSelection = false;
+  bool isDeviceWidthSafe = false;
   TextEditingController numberField = TextEditingController(text: "");
   int choosedCountryCode = 0;
   int choosedNumberHistory = 0;
   List<BasicConfig> config = [];
-
 
   @override
   void initialise(){
     getCountryCodes();
     getLatestCurrentCode();
     getNumbersHistory();
+  }
+
+  void checkDeviceWidth(BuildContext context) async {
+    // A method that checks a device width for current context
+    // SAFE WIDTH REQUIRES A DEVICE WITH <=480
+
+    if (getDeviceWidth(context) <= 480) {
+      isDeviceWidthSafe = true;
+      notifyListeners();
+    }
   }
 
   void getLatestCurrentCode() async {
