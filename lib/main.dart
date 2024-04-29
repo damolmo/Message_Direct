@@ -12,6 +12,9 @@ class DirectApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual, overlays: []);
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
