@@ -30,7 +30,7 @@ class NumbersHistory extends StatelessWidget{
               margin: EdgeInsets.only(
                 left: getDeviceWidth(context) * 0.01,
                 right: getDeviceWidth(context) * 0.01,
-                top: getDeviceHeight(context) * 0.025
+                top: getDeviceHeight(context) * 0.025,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

@@ -17,8 +17,8 @@ class CodesList extends StatelessWidget{
       margin: EdgeInsets.only(
         left: getDeviceWidth(context) * 0.05,
         right: getDeviceWidth(context) * 0.05,
-        top: getDeviceHeight(context) * 0.45,
-        bottom: getDeviceHeight(context) * 0.3
+        top: getDeviceHeight(context) * 0.05,
+        bottom: getDeviceHeight(context) * 0.05
       ),
       child: ListView.builder(
           itemCount: viewModel.codes.length,
@@ -28,7 +28,7 @@ class CodesList extends StatelessWidget{
               margin: EdgeInsets.only(
                 top: getDeviceHeight(context) * 0.025,
                 left: getDeviceWidth(context) * 0.05,
-                right: getDeviceWidth(context) * 0.05
+                right: getDeviceWidth(context) * 0.05,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,

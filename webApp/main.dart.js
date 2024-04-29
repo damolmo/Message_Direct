@@ -72736,7 +72736,7 @@ return A.bZ(s,s,B.p,s,new A.cc(s,A.ahC(A.L(a,s,r).w.a.a<=480?B.jy:B.xx,B.x7),s,s
 A.E1.prototype={
 J(a){var s=null,r=t.w,q=A.L(a,s,r).w,p=A.L(a,s,r).w,o=A.L(a,s,r).w,n=A.L(a,s,r).w
 r=A.L(a,s,r).w
-return A.bZ(s,A.amI(new A.Vm(this),J.bG(this.c.Q)),B.p,s,s,s,new A.ar(p.a.a*0.05,n.a.b*0.45,o.a.a*0.05,r.a.b*0.3),s,q.a.a*0.9)}}
+return A.bZ(s,A.amI(new A.Vm(this),J.bG(this.c.Q)),B.p,s,s,s,new A.ar(p.a.a*0.05,n.a.b*0.05,o.a.a*0.05,r.a.b*0.05),s,q.a.a*0.9)}}
 A.Vm.prototype={
 $2(a,b){var s=null,r=t.w,q=A.L(a,s,r).w,p=A.L(a,s,r).w,o=A.L(a,s,r).w,n=A.L(a,s,r).w,m=A.fu(15),l=A.L(a,s,r).w,k=this.a,j=k.c,i=J.aO(j.Q,b).b
 l=A.bZ(s,new A.vd(A.axJ(s,s,new A.j6(i,s,s)),B.jz,s),B.p,s,s,s,s,s,l.a.a*0.15)
