@@ -9,6 +9,7 @@ Opens a phone number directly on WhatsApp or Telegram
 # Platform Tested Compatibility
 
 - [x] android
+- [x] web
 
 # Dependencies
 All plugins used on this project
