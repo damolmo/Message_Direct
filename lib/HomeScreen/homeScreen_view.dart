@@ -15,8 +15,6 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
       Widget? child
       ){
 
-    viewModel.checkDeviceWidth(context);
-
     return Scaffold(
       resizeToAvoidBottomInset : false,
       body : Stack(
@@ -29,35 +27,35 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
           DirectBanner(viewModel: viewModel,),
 
           // Device Safe Width Alert
-          if (!viewModel.isDeviceWidthSafe)
+          if (getDeviceWidth(context) > 480)
             SafeWidthAlert(viewModel: viewModel),
 
           // Switch Buttons
-          if (viewModel.isDeviceWidthSafe)
+          if (getDeviceWidth(context) <= 480)
           SwitchButtons(viewModel: viewModel),
 
           // Telegram/WhatsApp action button
-          if (viewModel.isDialerSelected && viewModel.isDeviceWidthSafe)
+          if (viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
             TelegramButton(viewModel: viewModel),
 
 
           // UserField
-          if (viewModel.isDialerSelected && viewModel.isDeviceWidthSafe)
+          if (viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
             UserField(viewModel: viewModel),
 
           // Flag Selection
-          if (viewModel.isFlagSelection && viewModel.isDialerSelected && viewModel.isDeviceWidthSafe)
+          if (viewModel.isFlagSelection && viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
             CodesList(viewModel: viewModel),
 
           // Numbers History
-          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && viewModel.isDeviceWidthSafe)
+          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && getDeviceWidth(context) <= 480)
             NumbersHistory(viewModel: viewModel),
 
-          if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty && viewModel.isDeviceWidthSafe)
+          if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty && getDeviceWidth(context) <= 480)
             const NoHistoryMessage(),
 
           // Clear Numbers
-          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && viewModel.isDeviceWidthSafe)
+          if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && getDeviceWidth(context) <= 480)
             RemoveHistoryButton(viewModel: viewModel),
 
         ],
