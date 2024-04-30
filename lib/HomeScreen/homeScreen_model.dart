@@ -97,9 +97,9 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   getUriTelegramString(){
     if (isDialerSelected){
-      return (Uri.parse('https://t.me/${codes[choosedCountryCode].countryCode}${numberField.text}?chat_id=&text=${messageField.text}'));
+      return (Uri.parse('https://t.me/${codes[choosedCountryCode].countryCode}${numberField.text.replaceAll(" ", "")}?chat_id=&text=${messageField.text}'));
     } else{
-      return (Uri.parse('https://t.me/${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}?chat_id=&text=${messageField.text}'));
+      return (Uri.parse('https://t.me/${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText.replaceAll(" ", "")}?chat_id=&text=${messageField.text}'));
     }
   }
 
