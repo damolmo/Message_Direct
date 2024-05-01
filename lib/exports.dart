@@ -12,6 +12,8 @@ export 'HomeScreen/widgets/noHistoryMessage.dart';
 export 'HomeScreen/widgets/removeHistoryButton.dart';
 export 'HomeScreen/widgets/safeWidthAlert.dart';
 export 'HomeScreen/widgets/textField.dart';
+export 'HomeScreen/widgets/numberDetails.dart';
+export 'HomeScreen/widgets/closeButton.dart';
 export 'Databases/countryCodes.dart';
 export 'Databases/numberHistory.dart';
 export 'Databases/basicConfig.dart';

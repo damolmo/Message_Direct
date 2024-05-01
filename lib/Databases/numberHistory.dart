@@ -8,13 +8,15 @@ class NumberHistory{
     required this.numberText,
     required this.numberCountryCode,
     required this.numberCountryFlag,
-    required this.numberDate
+    required this.numberDate,
+    required this.numberMessage,
 });
 
   final String numberText;
   final String numberCountryCode;
   final String numberCountryFlag;
   final String numberDate;
+  final String numberMessage;
 
   static const numberHistoryTable = """
     CREATE TABLE IF NOT EXISTS numberHistory(
@@ -23,12 +25,13 @@ class NumberHistory{
       numberCountryCode TEXT,
       numberCountryFlag TEXT,
       numberDate TEXT,
+      numberMessage TEXT,
       FOREIGN KEY(numberCountryCode) REFERENCES countryCodes(countryCode),
       FOREIGN KEY(numberCountryFlag) REFERENCES countryCodes(countryFlag));
   """;
 
-  Map<String,dynamic> toMap() => {"numberText" :  numberText, "numberCountryCode" :  numberCountryCode, "numberCountryFlag" : numberCountryFlag, "numberDate" : numberDate};
-  factory NumberHistory.fromMap(Map<String,dynamic> map) => NumberHistory(numberText: map["numberText"], numberCountryCode: map["numberCountryCode"], numberCountryFlag: map["numberCountryFlag"], numberDate: map["numberDate"]);
+  Map<String,dynamic> toMap() => {"numberText" :  numberText, "numberCountryCode" :  numberCountryCode, "numberCountryFlag" : numberCountryFlag, "numberDate" : numberDate, "numberMessage" : numberMessage};
+  factory NumberHistory.fromMap(Map<String,dynamic> map) => NumberHistory(numberText: map["numberText"], numberCountryCode: map["numberCountryCode"], numberCountryFlag: map["numberCountryFlag"], numberDate: map["numberDate"], numberMessage : map["numberMessage"]);
 
   static createNumberHistoryTable() async {
     // A method that creates the number history table

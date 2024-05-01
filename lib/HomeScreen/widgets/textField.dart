@@ -37,7 +37,7 @@ class MessageField extends StatelessWidget{
           hintStyle: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold)
         ),
         controller: viewModel.messageField,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.multiline,
 
         onTap: (){
           viewModel.isMessageFieldActive = true;

@@ -20,9 +20,12 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
         if (viewModel.isFlagSelection){
           viewModel.isFlagSelection = false;
           viewModel.notifyListeners();
+        } else if (viewModel.chooseDetailsScreen) {
+          viewModel.chooseDetailsScreen = false;
+          viewModel.notifyListeners();
         }
       },
-      canPop: viewModel.isFlagSelection ? false : true,
+      canPop: viewModel.isFlagSelection || viewModel.chooseDetailsScreen ? false : true,
         child:Scaffold(
           resizeToAvoidBottomInset : false,
           body : Stack(
@@ -39,7 +42,7 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
                 SafeWidthAlert(viewModel: viewModel),
 
               // Switch Buttons
-              if (getDeviceWidth(context) <= 480)
+              if (!viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
               SwitchButtons(viewModel: viewModel),
 
               // Telegram/WhatsApp action button
@@ -59,15 +62,23 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
                 CodesList(viewModel: viewModel),
 
               // Numbers History
-              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && getDeviceWidth(context) <= 480)
+              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
                 NumbersHistory(viewModel: viewModel),
 
               if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty && getDeviceWidth(context) <= 480)
                 const NoHistoryMessage(),
 
               // Clear Numbers
-              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && getDeviceWidth(context) <= 480)
+              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
                 RemoveHistoryButton(viewModel: viewModel),
+
+              // Number Details
+              if (viewModel.chooseDetailsScreen && !viewModel.isDialerSelected)
+                NumberDetails(viewModel: viewModel),
+
+              // Close Button
+              if (viewModel.chooseDetailsScreen)
+                CustomCloseButton(viewModel : viewModel),
 
             ],
           )

@@ -15,6 +15,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isFlagSelection = false;
   bool isMessageFieldActive = false;
   bool enabledEasterEgg = false;
+  bool chooseDetailsScreen = false;
   TextEditingController numberField = TextEditingController(text: "");
   TextEditingController messageField = TextEditingController(text: "");
   int choosedCountryCode = 0;
@@ -112,7 +113,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     launchUrl(isWhatsAppUrl ? getWhatsAppUri() : getTelegramUri(), mode: LaunchMode.externalNonBrowserApplication);
   }
 
-  String getNumberDateTime() => "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day} - ${DateTime.now().hour < 10 ? "0${DateTime.now().hour}" : DateTime.now().hour}:${DateTime.now().minute < 10 ? "0${DateTime.now().minute}" : DateTime.now().minute}:${DateTime.now().second< 10 ? "0${DateTime.now().second}" : DateTime.now().second }";
+  String getNumberDateTime() => "${DateTime.now().year}/${DateTime.now().month < 10 ? "0${DateTime.now().month}" : DateTime.now().month}/${DateTime.now().day < 10 ? "0${DateTime.now().day}" : DateTime.now().day} - ${DateTime.now().hour < 10 ? "0${DateTime.now().hour}" : DateTime.now().hour}:${DateTime.now().minute < 10 ? "0${DateTime.now().minute}" : DateTime.now().minute}:${DateTime.now().second< 10 ? "0${DateTime.now().second}" : DateTime.now().second }";
 
   void addNumberToHistory() async {
     // A method that adds a number into the app history
@@ -121,7 +122,9 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
             numberText: numberField.text,
             numberCountryCode: codes[choosedCountryCode].countryCode,
             numberCountryFlag: codes[choosedCountryCode].countryFlag,
-            numberDate: getNumberDateTime()));
+            numberDate: getNumberDateTime(),
+            numberMessage : messageField.text.isEmpty ? " " :  messageField.text
+        ));
 
     // Clear App Attributes
     clearAppFields();
@@ -160,6 +163,13 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     }
 
     numbers.clear();
+    notifyListeners();
+  }
+
+  void dropSingleNumber() async {
+    // A method that removes an specified number
+    NumberHistory.removeExistingHistory(numbers[choosedNumberHistory]);
+    numbers.removeAt(choosedNumberHistory);
     notifyListeners();
   }
 
