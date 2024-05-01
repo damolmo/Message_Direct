@@ -39,8 +39,8 @@ class NumbersHistory extends StatelessWidget{
               ),
               child: ListTile(
                 leading: Container(
-                  width: getDeviceWidth(context) * 0.1,
-                  height: getDeviceHeight(context) * 0.1,
+                  width: getDeviceWidth(context) * 0.09,
+                  height: getDeviceWidth(context) <= 400  ? getDeviceHeight(context) * 0.04 : getDeviceHeight(context) * 0.05,
                   margin: EdgeInsets.only(
                     left: getDeviceWidth(context) * 0.05,
                     right: getDeviceWidth(context) * 0.025,
@@ -48,7 +48,7 @@ class NumbersHistory extends StatelessWidget{
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(35),
                     image: DecorationImage(
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.fill,
                       image: AssetImage(viewModel.numbers[index].numberCountryFlag)
                     )
                   ),

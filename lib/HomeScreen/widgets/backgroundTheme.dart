@@ -16,7 +16,7 @@ class BackgroundTheme extends StatelessWidget{
       width: getDeviceWidth(context),
       height: getDeviceHeight(context),
       decoration: BoxDecoration(
-        color: viewModel.isWhatsAppUrl ? whatsAppBackgroundColor :  telegramBackgroundColor
+        color: viewModel.enabledEasterEgg ? Colors.black : viewModel.isWhatsAppUrl ? whatsAppBackgroundColor :  telegramBackgroundColor
       ),
     );
   }

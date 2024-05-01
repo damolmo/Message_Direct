@@ -23,8 +23,18 @@ class DirectBanner extends StatelessWidget{
       ),
       decoration: BoxDecoration(
         image: DecorationImage(
-          fit: getDeviceWidth(context) <= 480 ? BoxFit.fill : BoxFit.fitHeight,
-          image: const AssetImage("assets/logo/logo.png")
+          fit: BoxFit.fitHeight,
+          image: viewModel.enabledEasterEgg ? const AssetImage("assets/logo/logo_easter.png") : const AssetImage("assets/logo/logo.png")
+            )
+          ),
+      child: InkWell(
+          onTap : (){
+            viewModel.enabledEasterEgg ? viewModel.enabledEasterEgg = false : viewModel.enabledEasterEgg = true;
+            viewModel.notifyListeners();
+        },
+        child : Image(
+        fit: BoxFit.fitHeight,
+        image: viewModel.enabledEasterEgg ? const AssetImage("assets/logo/logo_easter.png") : const AssetImage("assets/logo/logo.png")
         )
       ),
     );

@@ -19,8 +19,8 @@ class UserField extends StatelessWidget{
       margin: EdgeInsets.only(
         left: getDeviceWidth(context) * 0.05,
         right: getDeviceWidth(context) * 0.05,
-        top: viewModel.numberField.text.isNotEmpty && !viewModel.isFlagSelection ? viewModel.getKeyBoardTop(context) * 0.8 : viewModel.getKeyBoardTop(context),
-        bottom: viewModel.getKeyBoardBottom(context)
+        top: viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled ? getDeviceHeight(context) * 0.6 : viewModel.getKeyBoardTop(context) ,
+        bottom: viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled ? getDeviceHeight(context) * 0.3 :viewModel.getKeyBoardBottom(context)
       ),
       child: Row(
         children: [
@@ -31,10 +31,10 @@ class UserField extends StatelessWidget{
               viewModel.notifyListeners();
             },
             child : Container(
-            width: getDeviceWidth(context) * 0.15,
-            height: getDeviceHeight(context) * 0.07,
+            width: getDeviceWidth(context) <=400 ? getDeviceWidth(context) * 0.12 : getDeviceWidth(context) * 0.12,
+            height: getDeviceWidth(context) <=400  ? getDeviceHeight(context) * 0.055 : getDeviceHeight(context) * 0.065,
             margin: EdgeInsets.only(
-              right: getDeviceWidth(context) * 0.05
+              right: getDeviceWidth(context) * 0.065
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(55),
@@ -63,7 +63,6 @@ class UserField extends StatelessWidget{
               style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  * 0.06, fontWeight: FontWeight.bold ),
               onTap: (){
                 viewModel.isKeyboardEnabled = true;
-                viewModel.isFlagSelection = false;
                 viewModel.notifyListeners();
               },
 
@@ -93,7 +92,7 @@ class UserField extends StatelessWidget{
             width: getDeviceWidth(context) * 0.15,
             height: getDeviceHeight(context) * 0.1 ,
             margin: EdgeInsets.only(
-              left: getDeviceWidth(context) * 0.03
+              left: getDeviceWidth(context) * 0.045
             ),
             child: IconButton(
               onPressed: (){

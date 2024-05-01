@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:message_direct/Data/codesData.dart';
 import 'package:stacked/stacked.dart';
 import '../exports.dart';
@@ -16,10 +14,12 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isKeyboardEnabled = false;
   bool isFlagSelection = false;
   bool isMessageFieldActive = false;
+  bool enabledEasterEgg = false;
   TextEditingController numberField = TextEditingController(text: "");
   TextEditingController messageField = TextEditingController(text: "");
   int choosedCountryCode = 0;
   int choosedNumberHistory = 0;
+  int exitCounter = 0;
   List<BasicConfig> config = [];
 
   @override
@@ -55,7 +55,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   double getKeyBoardTop(BuildContext context)  {
     if (isKeyboardEnabled){
-      return getDeviceHeight(context) * 0.6;
+      return getDeviceHeight(context) * 0.5;
     } else {
       return getDeviceHeight(context) * 0.72;
     }
@@ -64,7 +64,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   double getKeyBoardBottom(BuildContext context) {
     if (isKeyboardEnabled){
-      return getDeviceHeight(context) * 0.3;
+      return getDeviceHeight(context) * 0.4;
     } else {
       return getDeviceHeight(context) * 0.1;
     }
@@ -112,7 +112,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     launchUrl(isWhatsAppUrl ? getWhatsAppUri() : getTelegramUri(), mode: LaunchMode.externalNonBrowserApplication);
   }
 
-  String getNumberDateTime() => "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day} - ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}";
+  String getNumberDateTime() => "${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day} - ${DateTime.now().hour < 10 ? "0${DateTime.now().hour}" : DateTime.now().hour}:${DateTime.now().minute < 10 ? "0${DateTime.now().minute}" : DateTime.now().minute}:${DateTime.now().second< 10 ? "0${DateTime.now().second}" : DateTime.now().second }";
 
   void addNumberToHistory() async {
     // A method that adds a number into the app history
@@ -176,5 +176,4 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
       return telegramBackgroundColor;
     }
   }
-
 }
