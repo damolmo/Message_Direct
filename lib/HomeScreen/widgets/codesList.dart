@@ -13,10 +13,10 @@ class CodesList extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
+      width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
       margin: EdgeInsets.only(
-        left: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
-        right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
+        left: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
+        right: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
         top: getDeviceHeight(context) * 0.05,
         bottom: getDeviceHeight(context) * 0.05
       ),
@@ -37,9 +37,9 @@ class CodesList extends StatelessWidget{
               ),
               child: ListTile(
                 leading: Container(
-                  width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.07 : getDeviceWidth(context) * 0.15,
+                  width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.07 : getDeviceWidth(context) * 0.15,
                   child : Image.asset(fit: BoxFit.fitWidth, viewModel.codes[index].countryFlag)),
-                title: Text(viewModel.codes[index].countryCode, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.03 : getDeviceWidth(context) * 0.06),) ,
+                title: Text(viewModel.codes[index].countryCode, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.03 : getDeviceWidth(context) * 0.06),) ,
                 subtitle:Text(viewModel.codes[index].countryAbreviation, style: const TextStyle(color: Colors.black,
                 ),
                 ),

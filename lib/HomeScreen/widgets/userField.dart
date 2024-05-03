@@ -14,12 +14,12 @@ class UserField extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
+      width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
       height: getDeviceHeight(context) * 0.1,
       margin: EdgeInsets.only(
-        left: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.27 : getDeviceWidth(context) * 0.05,
-        right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.23 : getDeviceWidth(context) * 0.05,
-        top: getDeviceWidth(context) > 480 && viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled? getDeviceHeight(context) * 0.45 :  viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled ? getDeviceHeight(context) * 0.6 : viewModel.getKeyBoardTop(context) ,
+        left: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.27 : getDeviceWidth(context) * 0.05,
+        right: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.23 : getDeviceWidth(context) * 0.05,
+        top: getDeviceWidth(context) > 580 && viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled? getDeviceHeight(context) * 0.45 :  viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled ? getDeviceHeight(context) * 0.6 : viewModel.getKeyBoardTop(context) ,
         bottom: viewModel.numberField.text.isNotEmpty && !viewModel.isKeyboardEnabled ? getDeviceHeight(context) * 0.3 :viewModel.getKeyBoardBottom(context)
       ),
       child: Row(
@@ -31,8 +31,8 @@ class UserField extends StatelessWidget{
               viewModel.notifyListeners();
             },
             child : Container(
-            width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.12,
-            height: getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.1 : getDeviceHeight(context) * 0.055,
+            width: getDeviceWidth(context) > 580  ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.12,
+            height: getDeviceWidth(context) > 580 ? getDeviceHeight(context) * 0.1 : getDeviceHeight(context) * 0.055,
             margin: EdgeInsets.only(
               right: getDeviceWidth(context) * 0.065
             ),
@@ -48,10 +48,10 @@ class UserField extends StatelessWidget{
           
           // Phone Field
           Container(
-            width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.23 : getDeviceWidth(context) * 0.5,
-            height: getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.1 : getDeviceHeight(context) * 0.07,
+            width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.23 : getDeviceWidth(context) * 0.5,
+            height: getDeviceWidth(context) > 580 ? getDeviceHeight(context) * 0.1 : getDeviceHeight(context) * 0.07,
             margin: EdgeInsets.only(
-              left: getDeviceWidth(context) > 480 ? 0.0 : getDeviceWidth(context) * 0.02
+              left: getDeviceWidth(context) > 580 ? 0.0 : getDeviceWidth(context) * 0.02
             ),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -60,7 +60,7 @@ class UserField extends StatelessWidget{
             ),
             child: TextField(
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  > 480 ? getDeviceWidth(context) * 0.035 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold ),
+              style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  > 580 ? getDeviceWidth(context) * 0.035 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold ),
               onTap: (){
                 viewModel.isKeyboardEnabled = true;
                 viewModel.notifyListeners();
@@ -79,7 +79,7 @@ class UserField extends StatelessWidget{
               },
               decoration: InputDecoration(
                 hintText: "Enter a phone",
-                hintStyle: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  > 480 ? getDeviceWidth(context) * 0.035 :getDeviceWidth(context)  * 0.06, fontWeight: FontWeight.bold ),
+                hintStyle: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context)  > 580 ? getDeviceWidth(context) * 0.035 :getDeviceWidth(context)  * 0.06, fontWeight: FontWeight.bold ),
                 border: InputBorder.none,
               ),
               controller: viewModel.numberField,
@@ -92,7 +92,7 @@ class UserField extends StatelessWidget{
             width: getDeviceWidth(context) * 0.15,
             height: getDeviceHeight(context) * 0.1 ,
             margin: EdgeInsets.only(
-              left: getDeviceWidth(context) > 480 ? 0.0 :getDeviceWidth(context) * 0.045
+              left: getDeviceWidth(context) > 580 ? 0.0 :getDeviceWidth(context) * 0.045
             ),
             child: IconButton(
               onPressed: (){

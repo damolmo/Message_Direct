@@ -37,7 +37,7 @@ class CustomCloseButton extends StatelessWidget{
               viewModel.isEditedCountryCode = false;
               viewModel.notifyListeners();
             },
-            icon: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.black.withOpacity(0.7), size: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.2,),
+            icon: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.black.withOpacity(0.7), size: getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.2,),
           ),
           const Spacer(),
         ],

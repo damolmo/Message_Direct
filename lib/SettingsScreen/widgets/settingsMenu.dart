@@ -15,17 +15,17 @@ class SettingsMenu extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      height: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.4 : getDeviceHeight(context) * 0.6,
+      height: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 : getDeviceHeight(context) * 0.6,
       margin: EdgeInsets.only(
-        left: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.3 : getDeviceWidth(context) * 0.05,
-        right:  getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.3 :getDeviceWidth(context) * 0.05,
+        left: getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.3 : getDeviceWidth(context) * 0.05,
+        right:  getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.3 :getDeviceWidth(context) * 0.05,
         top: getDeviceHeight(context) * 0.25,
       ),
       child: ListView.builder(
           itemCount: viewModel.settings.length,
           itemBuilder: (context, index){
             return Container(
-              width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.8,
+              width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.8,
               height: getDeviceHeight(context) * 0.125,
               margin: EdgeInsets.only(
                 top: getDeviceHeight(context) * 0.025,
@@ -55,9 +55,9 @@ class SettingsMenu extends StatelessWidget{
                         viewModel.notifyUser("This option isn't available right now", context);
                       }
                     },
-                    leading: Icon(IconData(viewModel.settings[index].settingIcon, fontFamily: "MaterialIcons"), size: getDeviceWidth(context) > 480 ? 24 : 44, color: Colors.white,),
-                    title: Text(viewModel.settings[index].settingTitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
-                    subtitle: Text(viewModel.settings[index].settingSubtitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.01 :getDeviceWidth(context) * 0.03, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
+                    leading: Icon(IconData(viewModel.settings[index].settingIcon, fontFamily: "MaterialIcons"), size: getDeviceWidth(context) > 580 ? 24 : 44, color: Colors.white,),
+                    title: Text(viewModel.settings[index].settingTitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
+                    subtitle: Text(viewModel.settings[index].settingSubtitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.01 :getDeviceWidth(context) * 0.03, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
                     trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Colors.white, size: 55,) ,
                   ),
                   const Spacer(),

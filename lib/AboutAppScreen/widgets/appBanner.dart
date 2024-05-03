@@ -27,7 +27,7 @@ class AppBanner extends StatelessWidget{
             height: getDeviceHeight(context) * 0.4,
             decoration: BoxDecoration(
               image: DecorationImage(
-                fit: getDeviceWidth(context) > 480 ?  BoxFit.fitHeight : BoxFit.fitWidth,
+                fit: getDeviceWidth(context) > 580 ?  BoxFit.fitHeight : BoxFit.fitWidth,
                 image: AssetImage("assets/logo/logo.png")
               )
             ),
@@ -43,7 +43,7 @@ class AppBanner extends StatelessWidget{
               bottom: getDeviceHeight(context) * 0.025,
               right: getDeviceWidth(context) * 0.05
             ),
-            child: Text("Message Direct", style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.04 : getDeviceWidth(context) * 0.07, fontWeight: FontWeight.bold, shadows : const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 12.0 )]), textAlign: TextAlign.left,),
+            child: Text("Message Direct", style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.04 : getDeviceWidth(context) * 0.07, fontWeight: FontWeight.bold, shadows : const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 12.0 )]), textAlign: TextAlign.left,),
           )
         ],
       ),
