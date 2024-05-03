@@ -21,6 +21,7 @@ class DirectApp extends StatelessWidget{
       home: const HomeScreenView() ,
       routes :  {
         "settings" : (_) => const SettingsScreenView(),
+        "about" : (_) => const AboutAppScreenView()
       }
     );
   }

@@ -15,22 +15,20 @@ class SettingsMenu extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) * 0.9,
-      height: getDeviceHeight(context) * 0.6,
+      width: kIsWeb ?  getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.9,
+      height: kIsWeb ? getDeviceWidth(context) * 0.4 : getDeviceHeight(context) * 0.6,
       margin: EdgeInsets.only(
-        left: getDeviceWidth(context) * 0.05,
-        right: getDeviceWidth(context) * 0.05,
+        left: kIsWeb ?  getDeviceWidth(context) * 0.3 : getDeviceWidth(context) * 0.05,
+        right:  kIsWeb ?  getDeviceWidth(context) * 0.3 :getDeviceWidth(context) * 0.05,
         top: getDeviceHeight(context) * 0.25,
       ),
       child: ListView.builder(
           itemCount: viewModel.settings.length,
           itemBuilder: (context, index){
             return Container(
-              width: getDeviceWidth(context) * 0.8,
+              width: kIsWeb ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.8,
               height: getDeviceHeight(context) * 0.125,
               margin: EdgeInsets.only(
-                left: getDeviceWidth(context) * 0.05,
-                right: getDeviceWidth(context) * 0.05,
                 top: getDeviceHeight(context) * 0.025,
               ),
               decoration: BoxDecoration(
@@ -47,17 +45,20 @@ class SettingsMenu extends StatelessWidget{
 
                     },
                     onTap: (){
-                      if (index == 1 && !kIsWeb){
+                      if (index == 1){
                         viewModel.exportData(context);
                       } else if (index == 2){
                         viewModel.importData(context);
+                      } else  if (index == 3) {
+                        viewModel.navigateToDesiredView(context, "about");
                       } else {
+                        print(getDeviceWidth(context));
                         viewModel.notifyUser("This option isn't available right now", context);
                       }
                     },
-                    leading: Icon(IconData(viewModel.settings[index].settingIcon, fontFamily: "MaterialIcons"), size: 44, color: Colors.white,),
-                    title: Text(viewModel.settings[index].settingTitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
-                    subtitle: Text(viewModel.settings[index].settingSubtitle, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) * 0.03, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
+                    leading: Icon(IconData(viewModel.settings[index].settingIcon, fontFamily: "MaterialIcons"), size: kIsWeb ? 24 : 44, color: Colors.white,),
+                    title: Text(viewModel.settings[index].settingTitle, style: TextStyle(color: Colors.white, fontSize: kIsWeb ? getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
+                    subtitle: Text(viewModel.settings[index].settingSubtitle, style: TextStyle(color: Colors.white, fontSize: kIsWeb ? getDeviceWidth(context) * 0.01 :getDeviceWidth(context) * 0.03, fontWeight: FontWeight.bold), textAlign: TextAlign.left,) ,
                     trailing: const Icon(Icons.keyboard_arrow_right_outlined, color: Colors.white, size: 55,) ,
                   ),
                   const Spacer(),

@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../exports.dart';
 
 class SettingsScreenModel extends HomeScreenModel implements Initialisable{
@@ -16,6 +18,7 @@ class SettingsScreenModel extends HomeScreenModel implements Initialisable{
   @override
   void initialise(){
     getCurrentSettings();
+    getRawContacts();
     super.isSettingsScreen = true;
     super.notifyListeners();
   }
@@ -53,20 +56,16 @@ class SettingsScreenModel extends HomeScreenModel implements Initialisable{
 
   void exportData(BuildContext context) async {
     // A method that allow us to export all contacts history
+    // Get raw data
+    addRawContacts();
 
-    // Catch the desired data
-    getRawContacts();
-
-    if (numbers.isNotEmpty){
+    if (numbers.isNotEmpty && !kIsWeb){
       // First, create a temp dir
       Directory tempDir = Directory('/storage/emulated/0/Download');
       notifyListeners();
 
       // Second, create a file in the new location
       File tempFile = File("${tempDir.path}/contacts_${DateTime.now().year}_${DateTime.now().month}_${DateTime.now().day}_${DateTime.now().second}_${DateTime.now().minute}_${DateTime.now().hour}.txt");
-
-      // Get raw data
-      addRawContacts();
 
       var data = jsonEncode(rawContacts);
       tempFile.writeAsStringSync(data);
@@ -75,6 +74,17 @@ class SettingsScreenModel extends HomeScreenModel implements Initialisable{
       notifyUser("File Downloaded at\n${tempFile.path}", context);
 
 
+    } else if (numbers.isNotEmpty && kIsWeb) {
+
+      // Get File and data
+      var data = json.encode(rawContacts);
+      List<int> bytes = utf8.encode(data);
+
+      // Notify Users about success
+      notifyUser("Your started to download", context);
+
+      // Download file
+      launchUrl(Uri.parse("data:application/octet-stream;base64,${base64Encode(bytes)}"));
     } else {
       notifyUser("Your contacts history is empty\nNothing to export", context);
     }
@@ -84,19 +94,31 @@ class SettingsScreenModel extends HomeScreenModel implements Initialisable{
     // A method that imports data into the database
 
     // Allow user to pick a file
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (!kIsWeb){
+      FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-    // Read data from file
-    File tempFile = File(result!.files.single.path!);
-    var data = await tempFile.readAsString();
-    rawContacts = jsonDecode(data) as List<dynamic>;
-    notifyListeners();
+      // Read data from file
+      File tempFile = File(result!.files.single.path!);
+      var data = await tempFile.readAsString();
+      rawContacts = jsonDecode(data) as List<dynamic>;
+      notifyListeners();
+    } else {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
+      List<int> bytes  = result?.files.first.bytes as List<int>;
+      var data = utf8.decode(bytes);
+      rawContacts = json.decode(data);
+      notifyListeners();
+    }
+
 
     // Insert Entries
     insertNumbers();
 
     // Notify users
     notifyUser("Your Data has been restored\nHave a nice day!", context);
+
+    // Catch data
+    getRawContacts();
   }
 
   void insertNumbers() async {

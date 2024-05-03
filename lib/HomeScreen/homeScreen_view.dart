@@ -41,34 +41,34 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
               CustomAppBar(viewModel: viewModel),
 
               // Device Safe Width Alert
-              if (getDeviceWidth(context) > 480)
-                SafeWidthAlert(viewModel: viewModel),
+              //if (getDeviceWidth(context) > 480)
+                //SafeWidthAlert(viewModel: viewModel),
 
               // Switch Buttons
-              if (!viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
+              if (!viewModel.chooseDetailsScreen)
               SwitchButtons(viewModel: viewModel),
 
               // Telegram/WhatsApp action button
-              if (viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
+              if (viewModel.isDialerSelected)
                 TelegramButton(viewModel: viewModel),
 
 
               // UserField
-              if (viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
+              if (viewModel.isDialerSelected)
                 UserField(viewModel: viewModel),
 
               if (viewModel.isDialerSelected && viewModel.numberField.text.isNotEmpty && !viewModel.isFlagSelection)
                 MessageField(viewModel: viewModel),
 
               // Numbers History
-              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
+              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen)
                 NumbersHistory(viewModel: viewModel),
 
-              if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty && getDeviceWidth(context) <= 480)
+              if (!viewModel.isDialerSelected && viewModel.numbers.isEmpty)
                 const NoHistoryMessage(),
 
               // Clear Numbers
-              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
+              if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen)
                 RemoveHistoryButton(viewModel: viewModel),
 
               // Number Details
@@ -80,7 +80,7 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
                 CustomCloseButton(viewModel : viewModel),
 
               // Flag Selection
-              if (viewModel.isFlagSelection && viewModel.isDialerSelected && getDeviceWidth(context) <= 480 || viewModel.isHistoryEdited && viewModel.isFlagSelection  && getDeviceWidth(context) <= 480)
+              if (viewModel.isFlagSelection && viewModel.isDialerSelected || viewModel.isHistoryEdited && viewModel.isFlagSelection)
                 CodesList(viewModel: viewModel),
 
             ],

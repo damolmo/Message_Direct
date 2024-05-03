@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:message_direct/variables.dart';
 import '../../exports.dart';
@@ -14,13 +15,13 @@ class SwitchButtons extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) * 0.9,
+      width: kIsWeb ? getDeviceWidth(context) * 0.55 : getDeviceWidth(context) * 0.9,
       height: getDeviceHeight(context) * 0.1,
       margin: EdgeInsets.only(
         top: getDeviceHeight(context) * 0.84,
         bottom: getDeviceHeight(context) * 0.06,
-        left: getDeviceWidth(context) * 0.05,
-        right: getDeviceWidth(context) * 0.05
+        left: kIsWeb ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
+        right: kIsWeb ? getDeviceWidth(context) * 0.22 : getDeviceWidth(context) * 0.05
      ),
       child: Row(
         children: [
@@ -31,10 +32,10 @@ class SwitchButtons extends StatelessWidget{
               viewModel.notifyListeners();
             },
             child : Container(
-                  width: getDeviceWidth(context) * 0.425,
+                  width: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.425,
                   height: getDeviceHeight(context) * 0.1,
                   margin: EdgeInsets.only(
-                    right: getDeviceWidth(context) * 0.05
+                    right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.05
                   ),
                   decoration: BoxDecoration(
                       color: viewModel.isDialerSelected ? Colors.white :  viewModel.getAppColor(),
@@ -51,7 +52,7 @@ class SwitchButtons extends StatelessWidget{
                         // Dialer Icon
                         Icon(Icons.phone_rounded, color: viewModel.isDialerSelected ? Colors.black : Colors.white, size: 35,),
                         // Dialer Text
-                        Text("Dialer", style: TextStyle(color: viewModel.isDialerSelected ? Colors.black : Colors.white, fontSize: getDeviceWidth(context) * 0.05, fontWeight: FontWeight.bold),)
+                        Text("Dialer", style: TextStyle(color: viewModel.isDialerSelected ? Colors.black : Colors.white, fontSize: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.05, fontWeight: FontWeight.bold),)
                       ],
                     ),
                   ),
@@ -67,7 +68,7 @@ class SwitchButtons extends StatelessWidget{
               viewModel.notifyListeners();
             },
             child : Container(
-              width: getDeviceWidth(context) * 0.425,
+              width:  getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.25 :getDeviceWidth(context) * 0.425,
               height: getDeviceHeight(context) * 0.1,
               decoration: BoxDecoration(
                   color: viewModel.isDialerSelected ? viewModel.getAppColor() : Colors.white ,
@@ -77,14 +78,14 @@ class SwitchButtons extends StatelessWidget{
               child: Container(
                 margin: EdgeInsets.only(
                   left: getDeviceWidth(context) * 0.07,
-                  right: getDeviceWidth(context) * 0.05
+                  right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.025 :getDeviceWidth(context) * 0.05
                 ),
                 child: Row(
                 children: [
                   // Dialer Icon
                   Icon(Icons.history_edu_rounded, color: viewModel.isDialerSelected ? Colors.white : Colors.black, size: 35,),
                   // Dialer Text
-                  Text("History", style: TextStyle(color: viewModel.isDialerSelected ? Colors.white : Colors.black, fontSize: getDeviceWidth(context) * 0.05, fontWeight: FontWeight.bold),)
+                  Text("History", style: TextStyle(color: viewModel.isDialerSelected ? Colors.white : Colors.black, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.05, fontWeight: FontWeight.bold),)
                   ],
                 ),
               ),

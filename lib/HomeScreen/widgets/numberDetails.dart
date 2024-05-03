@@ -15,13 +15,13 @@ class NumberDetails extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) * 0.9,
-      height: getDeviceHeight(context) * 0.47,
+      width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
+      height: getDeviceWidth(context) > 480  ? getDeviceHeight(context) * 0.6 : getDeviceHeight(context) * 0.47,
       margin: EdgeInsets.only(
-        left: getDeviceWidth(context) * 0.05,
-        right: getDeviceWidth(context) * 0.05,
-        top: getDeviceHeight(context) * 0.32,
-        bottom: getDeviceHeight(context) * 0.11,
+        left: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
+        right: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.25 :getDeviceWidth(context) * 0.05,
+        top: getDeviceWidth(context) > 480  ? getDeviceHeight(context) * 0.2 :getDeviceHeight(context) * 0.32,
+        bottom: getDeviceWidth(context) > 480  ? getDeviceHeight(context) * 0.2 : getDeviceHeight(context) * 0.11,
       ),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
@@ -33,11 +33,12 @@ class NumberDetails extends StatelessWidget{
 
           // Number Field
           Container(
-            width: getDeviceWidth(context) * 0.8,
+            width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.8,
             height: getDeviceHeight(context) * 0.1,
             margin: EdgeInsets.only(
-              left: getDeviceWidth(context) * 0.05,
-              right: getDeviceWidth(context) * 0.05,
+              top: getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.025 : 0.0,
+              left: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.075 : getDeviceWidth(context) * 0.025,
+              right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.025,
               bottom: getDeviceHeight(context) * 0.025
             ),
             child: Row(
@@ -51,8 +52,9 @@ class NumberDetails extends StatelessWidget{
                     viewModel.notifyListeners();
                   },
                   child : Container(
-                  width: getDeviceWidth(context) * 0.1,
-                  height: getDeviceHeight(context) * 0.05,
+                  width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.1,
+                  height: getDeviceWidth(context) > 480  ? getDeviceHeight(context) * 0.1 : getDeviceHeight(context) * 0.05,
+
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(55),
@@ -67,11 +69,11 @@ class NumberDetails extends StatelessWidget{
 
                 // Number Field
                 Container(
-                  width: getDeviceWidth(context) * 0.5,
+                  width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.2 : getDeviceWidth(context) * 0.5,
                   height: getDeviceHeight(context) * 0.07,
                   margin: EdgeInsets.only(
-                    left: getDeviceWidth(context) * 0.05,
-                    right: getDeviceWidth(context) * 0.05
+                    left: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.025 : getDeviceWidth(context) * 0.05,
+                    right: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.025 : getDeviceWidth(context) * 0.05
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(35),
@@ -97,7 +99,7 @@ class NumberDetails extends StatelessWidget{
                       viewModel.isKeyboardEnabled = false;
                       viewModel.notifyListeners();
                     },
-                  style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context) * 0.055, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.black, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.025 : getDeviceWidth(context) * 0.055, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       border: InputBorder.none,
@@ -120,9 +122,9 @@ class NumberDetails extends StatelessWidget{
                     }
                  },
                   child : Container(
-                  width: getDeviceWidth(context) * 0.1,
+                  width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.06 : getDeviceWidth(context) * 0.1,
                   height: getDeviceHeight(context) * 0.1,
-                  child: const Icon(Icons.send_rounded, color: Colors.blueAccent, size: 45,),
+                  child: Icon(Icons.send_rounded, color: Colors.blueAccent, size: getDeviceWidth(context) > 480  ? 35 : 45,),
                   )
                 ),
             ],
@@ -159,7 +161,7 @@ class NumberDetails extends StatelessWidget{
                 viewModel.notifyListeners();
               },
 
-              style:TextStyle(color: Colors.black, fontSize: getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold),
+              style:TextStyle(color: Colors.black, fontSize: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.04 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold),
               maxLines: 30,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
@@ -181,13 +183,13 @@ class NumberDetails extends StatelessWidget{
               viewModel.notifyListeners();
             },
             child : Container(
-              width: getDeviceWidth(context) * 0.9,
-              height: getDeviceHeight(context) * 0.12,
+              width: getDeviceWidth(context),
+              height: getDeviceWidth(context) > 480 ?  getDeviceHeight(context) * 0.2 : getDeviceHeight(context) * 0.12,
               margin: EdgeInsets.only(
                   left: getDeviceWidth(context) * 0.05,
                   right: getDeviceWidth(context) * 0.05,
                   top: getDeviceHeight(context) * 0.02,
-                  bottom: getDeviceHeight(context) * 0.02
+                  bottom: getDeviceWidth(context) > 480 ?  0.0 : getDeviceHeight(context) * 0.02
               ),
               decoration: BoxDecoration(
                   color: Colors.redAccent,
@@ -197,7 +199,7 @@ class NumberDetails extends StatelessWidget{
               child: Column(
                 children: [
                   const Spacer(),
-                  Text("Delete", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) * 0.07),),
+                  Text("Delete", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.07),),
                   const Spacer(),
                 ],
               ),
