@@ -19,13 +19,13 @@ class SettingsBanner extends StatelessWidget{
       width:  getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.3 : getDeviceWidth(context) * 0.9,
       height:  getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.2 : getDeviceHeight(context) * 0.2,
       margin: EdgeInsets.only(
-        left: kIsWeb ? getDeviceWidth(context) * 0.35: getDeviceWidth(context) * 0.05,
-        right: kIsWeb ? getDeviceWidth(context) * 0.25: getDeviceWidth(context) * 0.05,
+        left: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.35: getDeviceWidth(context) * 0.05,
+        right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.25: getDeviceWidth(context) * 0.05,
         bottom: getDeviceHeight(context) * 0.05
       ),
       child: Row(
         children: [
-          // Settings Icon
+          // SettiZngs Icon
           SizedBox(
             width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.3,
             height: getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.05 : getDeviceHeight(context) * 0.1  ,
@@ -37,11 +37,11 @@ class SettingsBanner extends StatelessWidget{
             width:  getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.2 : getDeviceWidth(context) * 0.5,
             height:  getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.14 : getDeviceHeight(context) * 0.2,
             margin: EdgeInsets.only(
-              top: kIsWeb ? getDeviceHeight(context) * 0.08 : getDeviceHeight(context) * 0.07,
-              bottom: kIsWeb ? getDeviceWidth(context) * 0.0 : getDeviceHeight(context) * 0.05,
+              top: getDeviceWidth(context) > 480 ? getDeviceHeight(context) * 0.08 : getDeviceHeight(context) * 0.07,
+              bottom: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.0 : getDeviceHeight(context) * 0.05,
               left: getDeviceWidth(context) *  0.05,
             ),
-            child: Text("Settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.13, shadows: kIsWeb ? const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 9.0)] : const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 13.0)]),),
+            child: Text("Settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.05 : getDeviceWidth(context) * 0.13, shadows: getDeviceWidth(context) > 480 ? const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 9.0)] : const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 13.0)]),),
           )
         ],
       ),

@@ -11,7 +11,7 @@ class NoHistoryMessage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.6,
+      width: getDeviceWidth(context) > 480  ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.6,
       height: getDeviceHeight(context) * 0.4,
       margin: EdgeInsets.only(
           top: getDeviceHeight(context) * 0.45,

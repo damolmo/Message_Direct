@@ -38,20 +38,20 @@ class TelegramButton extends StatelessWidget{
                 Container(
                   width: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.1 : getDeviceWidth(context) * 0.2,
                   margin: EdgeInsets.only(
-                    left: kIsWeb ?  getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.05
+                    left: getDeviceWidth(context) > 480 ?  getDeviceWidth(context) * 0.02 : getDeviceWidth(context) * 0.05
                   ),
                   child: Icon(viewModel.isWhatsAppUrl ? Icons.chat_bubble_rounded :  Icons.telegram_rounded, color: Colors.white, size: 35,),
                 ),
 
                 // App Text
                 Container(
-                  width: kIsWeb ? getDeviceWidth(context) * 0.15 :getDeviceWidth(context) * 0.5,
+                  width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.15 :getDeviceWidth(context) * 0.5,
                   margin: EdgeInsets.only(
                     top: getDeviceHeight(context) * 0.025,
                     bottom: getDeviceHeight(context) * 0.025,
                     right: getDeviceWidth(context) * 0.025
                   ),
-                  child: Center(child: Text(viewModel.isWhatsAppUrl ? "WhatsApp Mode" : "Telegram Mode", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.015 : getDeviceWidth(context) * 0.05), textAlign: kIsWeb ? TextAlign.left : TextAlign.center,)),
+                  child: Center(child: Text(viewModel.isWhatsAppUrl ? "WhatsApp Mode" : "Telegram Mode", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.015 : getDeviceWidth(context) * 0.05), textAlign: getDeviceWidth(context) > 480 ? TextAlign.left : TextAlign.center,)),
                 )
               ],
           ),

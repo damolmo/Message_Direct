@@ -15,13 +15,13 @@ class SwitchButtons extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      width: kIsWeb ? getDeviceWidth(context) * 0.55 : getDeviceWidth(context) * 0.9,
+      width: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.55 : getDeviceWidth(context) * 0.9,
       height: getDeviceHeight(context) * 0.1,
       margin: EdgeInsets.only(
         top: getDeviceHeight(context) * 0.84,
         bottom: getDeviceHeight(context) * 0.06,
-        left: kIsWeb ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
-        right: kIsWeb ? getDeviceWidth(context) * 0.22 : getDeviceWidth(context) * 0.05
+        left: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
+        right: getDeviceWidth(context) > 480 ? getDeviceWidth(context) * 0.22 : getDeviceWidth(context) * 0.05
      ),
       child: Row(
         children: [
