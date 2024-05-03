@@ -8,7 +8,7 @@ class DirectBanner extends StatelessWidget{
     super.key
 });
 
-  final HomeScreenModel viewModel;
+  final viewModel;
 
   @override
   Widget build(BuildContext context){
@@ -21,12 +21,6 @@ class DirectBanner extends StatelessWidget{
         left: getDeviceWidth(context) <= 480 ? getDeviceWidth(context) * 0.2 : getDeviceWidth(context) * 0.3,
         right: getDeviceWidth(context) <= 480 ? getDeviceWidth(context) * 0.2 : getDeviceWidth(context) * 0.3
       ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fitHeight,
-          image: viewModel.enabledEasterEgg ? const AssetImage("assets/logo/logo_easter.png") : const AssetImage("assets/logo/logo.png")
-            )
-          ),
       child: InkWell(
           onTap : (){
             viewModel.enabledEasterEgg ? viewModel.enabledEasterEgg = false : viewModel.enabledEasterEgg = true;
@@ -34,7 +28,7 @@ class DirectBanner extends StatelessWidget{
         },
         child : Image(
         fit: BoxFit.fitHeight,
-        image: viewModel.enabledEasterEgg ? const AssetImage("assets/logo/logo_easter.png") : const AssetImage("assets/logo/logo.png")
+          image : AssetImage(viewModel.getBannerAsset())
         )
       ),
     );

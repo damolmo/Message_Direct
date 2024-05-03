@@ -9,6 +9,7 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   List<CountryCodes> codes = [];
   List<NumberHistory> numbers  = [];
   bool isDialerSelected = true;
+  bool isHistoryEdited =  false;
   bool isNumberHistoryEmpty = true;
   bool isWhatsAppUrl = true;
   bool isKeyboardEnabled = false;
@@ -16,8 +17,12 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isMessageFieldActive = false;
   bool enabledEasterEgg = false;
   bool chooseDetailsScreen = false;
+  bool isEditingMessage = false;
+  bool isEditedCountryCode =  false;
+  bool isSettingsScreen = false;
   TextEditingController numberField = TextEditingController(text: "");
   TextEditingController messageField = TextEditingController(text: "");
+  int tempCountryCode = 0;
   int choosedCountryCode = 0;
   int choosedNumberHistory = 0;
   int exitCounter = 0;
@@ -40,6 +45,21 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
       BasicConfig.createBasicConfigTable();
     }
   }
+
+   String getBannerAsset() {
+    // A method that allow us to identify it
+    if (enabledEasterEgg && !isSettingsScreen){
+      return "assets/logo/logo_easter.png";
+    } else if (isSettingsScreen && !enabledEasterEgg){
+      return "assets/logo/logo_settings.png";
+    } else if (isSettingsScreen && enabledEasterEgg) {
+      return "assets/logo/logo_settings_easter.png";
+    } else {
+      return "assets/logo/logo.png";
+    }
+  }
+
+  bool getEasterState() => enabledEasterEgg;
 
   void getCountryCodes() async {
     // A method that retrieves existing country codes
@@ -91,14 +111,18 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   getUriWhatsAppString(){
     if (isDialerSelected){
       return (Uri.parse('whatsapp://send?phone="${codes[choosedCountryCode].countryCode}${numberField.text}"&text=${messageField.text}'));
-    } else{
-      return (Uri.parse('whatsapp://send?phone="${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}"&text=${messageField.text}'));
-    }
+    } else if (isHistoryEdited){
+      return (Uri.parse('whatsapp://send?phone="${isEditedCountryCode ? codes[tempCountryCode].countryCode : numbers[choosedNumberHistory].numberCountryCode}${numberField.text}"&text=${messageField.text}'));
+    } else {
+        return (Uri.parse('whatsapp://send?phone="${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText}"&text=${messageField.text}'));
+      }
   }
 
   getUriTelegramString(){
     if (isDialerSelected){
       return (Uri.parse('https://t.me/${codes[choosedCountryCode].countryCode}${numberField.text.replaceAll(" ", "")}?chat_id=&text=${messageField.text}'));
+    } else if (isHistoryEdited){
+      return (Uri.parse('https://t.me/${isEditedCountryCode ? codes[tempCountryCode].countryCode : numbers[choosedNumberHistory].numberCountryCode}${numberField.text.replaceAll(" ", "")}?chat_id=&text=${messageField.text}'));
     } else{
       return (Uri.parse('https://t.me/${numbers[choosedNumberHistory].numberCountryCode}${numbers[choosedNumberHistory].numberText.replaceAll(" ", "")}?chat_id=&text=${messageField.text}'));
     }
@@ -120,8 +144,8 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
       NumberHistory.insertNumberIntoTable(
         NumberHistory(
             numberText: numberField.text,
-            numberCountryCode: codes[choosedCountryCode].countryCode,
-            numberCountryFlag: codes[choosedCountryCode].countryFlag,
+            numberCountryCode: isEditedCountryCode ? codes[tempCountryCode].countryCode : codes[choosedCountryCode].countryCode,
+            numberCountryFlag: isEditedCountryCode ? codes[tempCountryCode].countryFlag : codes[choosedCountryCode].countryFlag,
             numberDate: getNumberDateTime(),
             numberMessage : messageField.text.isEmpty ? " " :  messageField.text
         ));
@@ -132,6 +156,26 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     // Reload History
     getNumbersHistory();
 
+  }
+
+  void modifyExistingNumber(int index) async {
+    // A method that allow us to modify current number
+
+    // Modify the number
+    NumberHistory number = NumberHistory(
+        numberText: numbers[choosedNumberHistory].numberText,
+        numberCountryCode: codes[index].countryCode,
+        numberCountryFlag: codes[index].countryFlag,
+        numberDate: numbers[choosedNumberHistory].numberDate,
+        numberMessage: messageField.text == numbers[choosedNumberHistory].numberText ? numbers[choosedNumberHistory].numberText : messageField.text );
+
+    // Update the number
+    NumberHistory.updateExistingNumber(number);
+
+    // Refresh and call listeners
+    getNumbersHistory();
+
+    print("New Number Code : ${number.numberCountryCode}");
   }
 
   void clearAppFields() async {
@@ -178,6 +222,9 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     SnackBar bar = SnackBar(content: Text(message, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold ), textAlign: TextAlign.center,), behavior: SnackBarBehavior.floating ,);
     ScaffoldMessenger.of(context).showSnackBar(bar);
   }
+
+  void navigateToDesiredView(BuildContext context, String viewName) => Navigator.of(context).pushNamed(viewName);
+
 
   Color getAppColor() {
     if (isWhatsAppUrl){

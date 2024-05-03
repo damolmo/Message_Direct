@@ -2,6 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 
+// App Build Data
+const String appVersion  = "v3.0";
+const String appUpdateTime = "2024-05-03 03:30:00";
+const String appDeveloper = "Damolmo";
+
+
 double getDeviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
 double getDeviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 Color whatsAppBackgroundColor = Color(int.parse("FF04c886", radix: 16));

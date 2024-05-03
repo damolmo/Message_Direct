@@ -61,6 +61,8 @@ class SwitchButtons extends StatelessWidget{
           // History Button
           InkWell(
             onTap: (){
+              // This is needed to allow UI to refresh data
+              viewModel.getNumbersHistory();
               viewModel.isDialerSelected = false;
               viewModel.notifyListeners();
             },

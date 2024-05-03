@@ -37,6 +37,9 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
               // Logo Banner
               DirectBanner(viewModel: viewModel,),
 
+              // Custom App Bar
+              CustomAppBar(viewModel: viewModel),
+
               // Device Safe Width Alert
               if (getDeviceWidth(context) > 480)
                 SafeWidthAlert(viewModel: viewModel),
@@ -57,10 +60,6 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
               if (viewModel.isDialerSelected && viewModel.numberField.text.isNotEmpty && !viewModel.isFlagSelection)
                 MessageField(viewModel: viewModel),
 
-              // Flag Selection
-              if (viewModel.isFlagSelection && viewModel.isDialerSelected && getDeviceWidth(context) <= 480)
-                CodesList(viewModel: viewModel),
-
               // Numbers History
               if (!viewModel.isDialerSelected && viewModel.numbers.isNotEmpty && !viewModel.chooseDetailsScreen && getDeviceWidth(context) <= 480)
                 NumbersHistory(viewModel: viewModel),
@@ -79,6 +78,10 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
               // Close Button
               if (viewModel.chooseDetailsScreen)
                 CustomCloseButton(viewModel : viewModel),
+
+              // Flag Selection
+              if (viewModel.isFlagSelection && viewModel.isDialerSelected && getDeviceWidth(context) <= 480 || viewModel.isHistoryEdited && viewModel.isFlagSelection  && getDeviceWidth(context) <= 480)
+                CodesList(viewModel: viewModel),
 
             ],
           )

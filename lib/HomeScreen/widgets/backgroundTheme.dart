@@ -8,7 +8,7 @@ class BackgroundTheme extends StatelessWidget{
     super.key
 });
 
-  final HomeScreenModel viewModel;
+  final viewModel;
 
   @override
   Widget build(BuildContext context){

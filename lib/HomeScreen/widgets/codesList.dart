@@ -45,12 +45,22 @@ class CodesList extends StatelessWidget{
                 ),
                 trailing: IconButton(
                   onPressed: (){
-                    viewModel.isFlagSelection = false;
-                    viewModel.choosedCountryCode = index;
-                    viewModel.notifyListeners();
+                    if (viewModel.isDialerSelected){
+                      viewModel.isFlagSelection = false;
+                      viewModel.choosedCountryCode = index;
+                      viewModel.notifyListeners();
+                    } else {
+                      viewModel.isHistoryEdited = true;
+                      viewModel.tempCountryCode = index;
+                      viewModel.isEditedCountryCode = true;
+                      viewModel.isFlagSelection = false;
+                      viewModel.modifyExistingNumber(index);
+                      viewModel.notifyListeners();
+                    }
+
 
                   },
-                  icon: const Icon(Icons.send, color: Colors.blueAccent, size: 35,),
+                  icon: Icon(Icons.arrow_forward_ios_rounded, color: Colors.black.withOpacity(0.6), size: 40,),
                 ),
               ),
             );

@@ -16,9 +16,12 @@ class DirectApp extends StatelessWidget{
       DeviceOrientation.portraitUp,
     ]);
     SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual, overlays: []);
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreenView() ,
+      home: const HomeScreenView() ,
+      routes :  {
+        "settings" : (_) => const SettingsScreenView(),
+      }
     );
   }
 }

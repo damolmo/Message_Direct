@@ -86,6 +86,7 @@ class NumbersHistory extends StatelessWidget{
                             onTap : (){
                               viewModel.choosedNumberHistory = index;
                               viewModel.messageField.text = viewModel.numbers[index].numberMessage;
+                              viewModel.numberField.text = viewModel.numbers[index].numberText;
                               viewModel.chooseDetailsScreen = true;
                               viewModel.notifyListeners();
                               },
