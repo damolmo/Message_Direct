@@ -16,6 +16,8 @@ All plugins used on this project
 ```
 dependencies :
   url_launcher: ^6.2.6
+  path_provider: ^2.1.3
+  file_picker: ^8.0.3
 ```
 
 # Permissions
