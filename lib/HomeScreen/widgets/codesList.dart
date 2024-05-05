@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../exports.dart';
 
 class CodesList extends StatelessWidget{
@@ -13,6 +14,7 @@ class CodesList extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
+      height: getDeviceHeight(context) * 0.9,
       width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.5 : getDeviceWidth(context) * 0.9,
       margin: EdgeInsets.only(
         left: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.25 : getDeviceWidth(context) * 0.05,
@@ -46,15 +48,22 @@ class CodesList extends StatelessWidget{
                 trailing: IconButton(
                   onPressed: (){
                     if (viewModel.isDialerSelected){
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
                       viewModel.isFlagSelection = false;
-                      viewModel.choosedCountryCode = index;
+                      viewModel.choosedCountryCodeAbreviation = viewModel.codes[index].countryAbreviation;
+                      viewModel.codeField.text = "";
+                      viewModel.getIndexForUserCodeAbreviation();
+                      viewModel.getCountryCodes();
                       viewModel.notifyListeners();
                     } else {
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
                       viewModel.isHistoryEdited = true;
-                      viewModel.tempCountryCode = index;
                       viewModel.isEditedCountryCode = true;
                       viewModel.isFlagSelection = false;
-                      viewModel.modifyExistingNumber(index);
+                      viewModel.choosedCountryCodeAbreviation = viewModel.codes[index].countryAbreviation;
+                      viewModel.codeField.text = "";
+                      viewModel.getIndexForUserCodeAbreviation();
+                      viewModel.getCountryCodes();
                       viewModel.notifyListeners();
                     }
 

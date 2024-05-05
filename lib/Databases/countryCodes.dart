@@ -48,15 +48,17 @@ class CountryCodes {
     }
   }
 
+  static List<CountryCodes> rawToInstance(List<Map<String,dynamic>> rawCodes, List<CountryCodes> codes) {
+    for (Map<String,dynamic> rawCode in rawCodes){
+      codes.add(CountryCodes.fromMap(rawCode));
+    }
+    return codes;
+  }
+
   static Future<List<CountryCodes>> retrieveCurrentCodes() async {
     // A static method that retrieves existing country codes
 
-    List<CountryCodes> rawToInstance(List<Map<String,dynamic>> rawCodes, List<CountryCodes> codes) {
-      for (Map<String,dynamic> rawCode in rawCodes){
-        codes.add(CountryCodes.fromMap(rawCode));
-      }
-      return codes;
-    }
+
 
     List<CountryCodes> codes = [];
 
@@ -67,6 +69,16 @@ class CountryCodes {
       final Database db = await openDatabase("direct.db");
       codes = rawToInstance(await db.query("countryCodes"), codes);
     }
+    return codes;
+  }
+
+  static Future<List<CountryCodes>> retrieveSpecificCode(String abreviation) async {
+    // A static method that allow us to search and return a specific code
+    List<CountryCodes> codes = [];
+
+    final Database db =  kIsWeb? await databaseFactoryFfiWeb.openDatabase("direct.db") : await openDatabase("direct.db");
+    codes =  rawToInstance(await db.query("countryCodes", where: "countryAbreviation = ?", whereArgs: [abreviation]), codes);
+    
     return codes;
   }
 

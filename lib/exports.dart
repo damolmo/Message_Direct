@@ -15,6 +15,7 @@ export 'HomeScreen/widgets/textField.dart';
 export 'HomeScreen/widgets/numberDetails.dart';
 export 'HomeScreen/widgets/closeButton.dart';
 export 'HomeScreen/widgets/customAppBar.dart';
+export 'HomeScreen/widgets/searchCodeField.dart';
 export 'SettingsScreen/settingsScreen_view.dart';
 export 'SettingsScreen/settingsScreen_model.dart';
 export 'SettingsScreen/widgets/settingsBanner.dart';

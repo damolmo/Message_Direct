@@ -41,7 +41,7 @@ class AppBanner extends StatelessWidget{
             margin: EdgeInsets.only(
               top: getDeviceHeight(context) * 0.05,
               bottom: getDeviceHeight(context) * 0.025,
-              right: getDeviceWidth(context) * 0.05
+              right: getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.1 : getDeviceWidth(context) * 0.05
             ),
             child: Text("Message Direct", style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.04 : getDeviceWidth(context) * 0.07, fontWeight: FontWeight.bold, shadows : const [Shadow(color: Colors.black, offset: Offset.zero, blurRadius: 12.0 )]), textAlign: TextAlign.left,),
           )

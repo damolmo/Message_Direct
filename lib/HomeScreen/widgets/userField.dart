@@ -40,7 +40,7 @@ class UserField extends StatelessWidget{
               borderRadius: BorderRadius.circular(55),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: viewModel.codes.isEmpty ? const AssetImage("assets/flags/us.png") : AssetImage(viewModel.codes[viewModel.choosedCountryCode].countryFlag)
+                image: viewModel.codes.isEmpty ? const AssetImage("assets/flags/us.png") : AssetImage(viewModel.backupCodes[viewModel.choosedCountryCode].countryFlag)
               )
             ),
             ),

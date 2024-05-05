@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:message_direct/Data/codesData.dart';
 import 'package:stacked/stacked.dart';
@@ -7,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   List<CountryCodes> codes = [];
+  List<CountryCodes> backupCodes = [];
   List<NumberHistory> numbers  = [];
   bool isDialerSelected = true;
   bool isHistoryEdited =  false;
@@ -22,8 +25,10 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
   bool isSettingsScreen = false;
   TextEditingController numberField = TextEditingController(text: "");
   TextEditingController messageField = TextEditingController(text: "");
+  TextEditingController codeField = TextEditingController(text: "");
   int tempCountryCode = 0;
   int choosedCountryCode = 0;
+  String choosedCountryCodeAbreviation =  "";
   int choosedNumberHistory = 0;
   int exitCounter = 0;
   List<BasicConfig> config = [];
@@ -35,11 +40,27 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     getNumbersHistory();
   }
 
+  void getIndexForUserCodeAbreviation() async {
+    // Since we're using a name instead of index
+    // Getting the original index for this code is necessary
+
+    for(CountryCodes code in backupCodes){
+      if (code.countryAbreviation == choosedCountryCodeAbreviation){
+        choosedCountryCode = backupCodes.indexOf(code);
+        tempCountryCode = backupCodes.indexOf(code);
+        if (!isDialerSelected) modifyExistingNumber(backupCodes.indexOf(code));
+        notifyListeners();
+      }
+    }
+
+  }
+
   void getLatestCurrentCode() async {
     // A method that retrieves last user selected country code
     try {
       config =  await BasicConfig.retrieveRequestedFlag("countryCode");
-      choosedCountryCode =  int.parse(config[0].flagValue);
+      choosedCountryCodeAbreviation = config[0].flagValue;
+      getIndexForUserCodeAbreviation();
       notifyListeners();
     } catch (e){
       BasicConfig.createBasicConfigTable();
@@ -66,10 +87,12 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     // Inserts new ones if missing
     try {
       codes = await CountryCodes.retrieveCurrentCodes();
+      backupCodes = codes;
       notifyListeners();
     } catch (e){
       CodesData.insertCodesValues();
       codes = await CountryCodes.retrieveCurrentCodes();
+      backupCodes = codes;
       notifyListeners();
     }
   }
@@ -164,8 +187,8 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     // Modify the number
     NumberHistory number = NumberHistory(
         numberText: numbers[choosedNumberHistory].numberText,
-        numberCountryCode: codes[index].countryCode,
-        numberCountryFlag: codes[index].countryFlag,
+        numberCountryCode: backupCodes[index].countryCode,
+        numberCountryFlag: backupCodes[index].countryFlag,
         numberDate: numbers[choosedNumberHistory].numberDate,
         numberMessage: messageField.text == numbers[choosedNumberHistory].numberText ? numbers[choosedNumberHistory].numberText : messageField.text );
 
@@ -191,12 +214,12 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
       BasicConfig.insertConfigIntoTable(
           BasicConfig(
               flagName: "countryCode",
-              flagValue: choosedCountryCode.toString()));
+              flagValue: choosedCountryCodeAbreviation));
     } else {
       BasicConfig.updateExistingFlag(
           BasicConfig(
               flagName: "countryCode",
-              flagValue: choosedCountryCode.toString()));
+              flagValue: choosedCountryCodeAbreviation));
     }
   }
 
@@ -210,6 +233,24 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
     notifyListeners();
   }
 
+  void autoRefreshCodesList(BuildContext context) async {
+    // A method that help us to search and restore codes list for all types os situations
+    if (codeField.text.isNotEmpty){
+      // There's something to search :)
+      try {
+        codes = await CountryCodes.retrieveSpecificCode(codeField.text.toUpperCase());
+        notifyListeners();
+      } catch (e){
+        // Requested code doesn't exists
+        notifyUserRequiredValue("No results found\nTry again!", context);
+        codes = backupCodes;
+        notifyListeners();
+      }
+    } else {
+      getCountryCodes();
+    }
+  }
+
   void dropSingleNumber() async {
     // A method that removes an specified number
     NumberHistory.removeExistingHistory(numbers[choosedNumberHistory]);
@@ -219,9 +260,13 @@ class HomeScreenModel extends BaseViewModel implements Initialisable{
 
   void notifyUserRequiredValue(String message, BuildContext context){
     // This method allow us to notify user about an empty value
-    SnackBar bar = SnackBar(content: Text(message, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold ), textAlign: TextAlign.center,), behavior: SnackBarBehavior.floating ,);
-    ScaffoldMessenger.of(context).showSnackBar(bar);
-  }
+    if (getDeviceWidth(context) < 580){
+      // Snack doesn't adapt to big screens
+      SnackBar bar = SnackBar(content: Text(message, style: TextStyle(color: Colors.white, fontSize: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.03 : getDeviceWidth(context) * 0.06, fontWeight: FontWeight.bold ), textAlign: TextAlign.center,), behavior: getDeviceWidth(context) > 580 ?  SnackBarBehavior.floating :  SnackBarBehavior.floating, margin: getDeviceWidth(context) > 580 ? EdgeInsets.only(bottom: getDeviceHeight(context) * 0.8,) :  EdgeInsets.only());
+      ScaffoldMessenger.of(context).showSnackBar(bar);
+      }
+    }
+
 
   void navigateToDesiredView(BuildContext context, String viewName) => Navigator.of(context).pushNamed(viewName);
 

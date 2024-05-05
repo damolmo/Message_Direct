@@ -15,11 +15,12 @@ class SettingsMenu extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      height: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 : getDeviceHeight(context) * 0.6,
+      width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 :  getDeviceWidth(context) * 0.9,
+      height: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 : getDeviceHeight(context) * 0.75,
       margin: EdgeInsets.only(
         left: getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.3 : getDeviceWidth(context) * 0.05,
         right:  getDeviceWidth(context) > 580 ?  getDeviceWidth(context) * 0.3 :getDeviceWidth(context) * 0.05,
-        top: getDeviceHeight(context) * 0.25,
+        top: getDeviceHeight(context) * 0.3,
       ),
       child: ListView.builder(
           itemCount: viewModel.settings.length,
@@ -28,6 +29,8 @@ class SettingsMenu extends StatelessWidget{
               width: getDeviceWidth(context) > 580 ? getDeviceWidth(context) * 0.4 : getDeviceWidth(context) * 0.8,
               height: getDeviceHeight(context) * 0.125,
               margin: EdgeInsets.only(
+                left: kIsWeb? 0.0 : getDeviceWidth(context) * 0.05,
+                right: kIsWeb? 0.0 : getDeviceWidth(context) * 0.05,
                 top: getDeviceHeight(context) * 0.025,
               ),
               decoration: BoxDecoration(

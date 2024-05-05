@@ -18,6 +18,8 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
     return PopScope(
       onPopInvoked: (pop){
         if (viewModel.isFlagSelection){
+          viewModel.getCountryCodes();
+          viewModel.codeField.text = "";
           viewModel.isFlagSelection = false;
           viewModel.notifyListeners();
         } else if (viewModel.chooseDetailsScreen) {
@@ -82,6 +84,10 @@ class HomeScreenView extends StackedView<HomeScreenModel>{
               // Flag Selection
               if (viewModel.isFlagSelection && viewModel.isDialerSelected || viewModel.isHistoryEdited && viewModel.isFlagSelection)
                 CodesList(viewModel: viewModel),
+
+              // Search Flag
+              if (viewModel.isFlagSelection)
+              SearchCodeField(viewModel: viewModel),
 
             ],
           )
