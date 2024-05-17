@@ -3,8 +3,8 @@
 import 'package:flutter/cupertino.dart';
 
 // App Build Data
-const String appVersion  = "v3.2";
-const String appUpdateTime = "2024-05-05 18:49:12";
+const String appVersion  = "v3.2.1";
+const String appUpdateTime = "2024-05-17 09:00:00";
 const String appDeveloper = "Damolmo";
 
 
